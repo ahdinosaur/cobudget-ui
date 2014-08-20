@@ -138,7 +138,11 @@ module.exports = function (grunt) {
           'app/scripts/bundle.js': 'app/scripts/app.coffee'
         },
         options: {
-          debug: false
+          debug: false,
+          transform: [
+            "coffeeify",
+            "envify",
+          ]
         }
       },
       development: {
@@ -147,7 +151,11 @@ module.exports = function (grunt) {
         },
         options: {
           debug: true,
-          watch: true
+          watch: true,
+          transform: [
+            "coffeeify",
+            "envify"
+          ]
         }
       }
     },

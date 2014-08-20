@@ -62,12 +62,6 @@
   "engines": {
     "node": ">=0.8.0"
   },
-  "browserify": {
-    "transform": [
-      "coffeeify",
-      "envify"
-    ]
-  },
   "scripts": {
     "test": "protractor config/protractor.js",
     "bower-install": "bower install",
