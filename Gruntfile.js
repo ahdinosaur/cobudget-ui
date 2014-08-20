@@ -22,10 +22,6 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['compass:server']
       },
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/**/**/*.coffee'],
-        tasks: ['coffee:dist']
-      },
       coffeeTest: {
         files: ['test/spec/{,*/}*.coffee'],
         tasks: ['coffee:test']
@@ -134,19 +130,27 @@ module.exports = function (grunt) {
         }
       }
     },
+    browserify: {
+      options: {},
+      files: {
+        '.tmp/scripts/app.js': 'app/scripts/app.coffee'
+      },
+      dist: {
+        options: {
+          debug: false
+        }
+      },
+      development: {
+        options: {
+          debug: true,
+          watch: true
+        }
+      }
+    },
     coffee: {
       options: {
         sourceMap: true,
         sourceRoot: ''
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/scripts',
-          src: '**/**/*.coffee',
-          dest: '.tmp/scripts',
-          ext: '.js'
-        }]
       },
       test: {
         files: [{
@@ -278,7 +282,7 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'compass',
-        'coffee:dist',
+        'browserify:dist',
         'copy:styles'
       ],
       test: [
@@ -411,6 +415,7 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
+      'browserify:development',
       'watch'
     ]);
   });
@@ -435,6 +440,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
+    'browserify:dist',
     'concat',
     'ngmin',
     'copy:dist',
