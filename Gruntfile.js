@@ -12,6 +12,17 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   grunt.initConfig({
+    env: {
+      development: {
+        NODE_ENV: 'development'
+      },
+      staging: {
+        NODE_ENV: 'staging'
+      },
+      production: {
+        NODE_ENV: 'production'
+      }
+    },
     yeoman: {
       // configurable paths
       app: 'app',
@@ -324,61 +335,6 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-    //TODO Get rid of the duplication with the files arrray
-    replace: {
-      development: {
-        options: {
-          patterns: [{
-            json: grunt.file.readJSON('./config/environments/development.json')
-          }]
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
-      },
-      test: {
-        options: {
-          patterns: [{
-            json: grunt.file.readJSON('./config/environments/test.json')
-          }]
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
-      },
-      staging: {
-        options: {
-          patterns: [{
-            json: grunt.file.readJSON('./config/environments/staging.json')
-          }]
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
-      },
-      production: {
-        options: {
-          patterns: [{
-            json: grunt.file.readJSON('./config/environments/production.json')
-          }]
-        },
-        files: [{
-          expand: true,
-          flatten: true,
-          src: ['./config/config.coffee'],
-          dest: '<%= yeoman.app %>/scripts/'
-        }]
-      }
-    },
     protractor: {
       options: {
         configFile: "config/protractor.js", 
@@ -406,8 +362,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      'env:development',
       'clean:server',
-      'replace:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -451,12 +407,12 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('staging', [
-    'replace:staging',
+    'env:staging',
     'build'
   ]);
 
   grunt.registerTask('production', [
-    'replace:production',
+    'env:production',
     'build'
   ]);
 };
