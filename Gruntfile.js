@@ -142,6 +142,7 @@ module.exports = function (grunt) {
           transform: [
             "coffeeify",
             "envify",
+            ['browserify-ngannotate', { x: '.coffee'}]
           ]
         }
       },
@@ -320,16 +321,6 @@ module.exports = function (grunt) {
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-    ngmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
-        }]
       }
     },
     uglify: {
