@@ -1,2 +1,2 @@
-window.Cobudget.BudgetController = ($scope) ->
+module.exports = ($scope) ->
   $scope.message = 'hi'

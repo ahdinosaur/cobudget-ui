@@ -1,5 +1,5 @@
-window.Cobudget.Router = ($routeProvider) ->
+module.exports = ($routeProvider) ->
   $routeProvider
     .when '/',
       templateUrl: '/views/budget-overview.html'
-      controller: window.Cobudget.BudgetController
+      controller: require('../controllers/budget_controller.coffee')
