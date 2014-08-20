@@ -131,16 +131,20 @@ module.exports = function (grunt) {
       }
     },
     browserify: {
+      // TODO de-dupe files configuration
       options: {},
-      files: {
-        '.tmp/scripts/app.js': 'app/scripts/app.coffee'
-      },
       dist: {
+        files: {
+          'app/scripts/bundle.js': 'app/scripts/app.coffee'
+        },
         options: {
           debug: false
         }
       },
       development: {
+        files: {
+          'app/scripts/bundle.js': 'app/scripts/app.coffee'
+        },
         options: {
           debug: true,
           watch: true
@@ -282,7 +286,7 @@ module.exports = function (grunt) {
     concurrent: {
       server: [
         'compass',
-        'browserify:dist',
+        'browserify:development',
         'copy:styles'
       ],
       test: [
@@ -292,6 +296,7 @@ module.exports = function (grunt) {
       dist: [
         'compass',
         'coffee',
+        'browserify:dist',
         'copy:styles',
         'imagemin',
         'svgmin',
@@ -415,7 +420,6 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
-      'browserify:development',
       'watch'
     ]);
   });
@@ -440,7 +444,6 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'browserify:dist',
     'concat',
     'ngmin',
     'copy:dist',
