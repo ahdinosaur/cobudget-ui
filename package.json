@@ -45,6 +45,7 @@
   },
   "scripts": {
     "test": "protractor config/protractor.js",
-    "bower-install": "bower install"
+    "bower-install": "bower install",
+    "server": "grunt server"
   }
 }
