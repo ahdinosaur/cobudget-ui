@@ -142,7 +142,8 @@ module.exports = function (grunt) {
           transform: [
             "coffeeify",
             "envify",
-            ['browserify-ngannotate', { x: '.coffee'}]
+            ['browserify-ngannotate', { x: '.coffee'}],
+            [{ global: true }, "uglifyify"]
           ]
         }
       },
@@ -323,15 +324,6 @@ module.exports = function (grunt) {
         html: ['<%= yeoman.dist %>/*.html']
       }
     },
-    uglify: {
-      dist: {
-        files: {
-          '<%= yeoman.dist %>/scripts/scripts.js': [
-            '<%= yeoman.dist %>/scripts/scripts.js'
-          ]
-        }
-      }
-    },
     //TODO Get rid of the duplication with the files arrray
     replace: {
       development: {
@@ -448,7 +440,6 @@ module.exports = function (grunt) {
     'copy:dist',
     'cdnify',
     'cssmin',
-    'uglify',
     'rev',
     'usemin'
   ]);
