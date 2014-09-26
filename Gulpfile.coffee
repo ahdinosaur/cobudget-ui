@@ -84,6 +84,33 @@ gulp.task 'scripts-build', scripts(false)
 gulp.task 'scripts-watch', scripts(true)
 
 #
+# assets
+#
+html = (isWatch) ->
+  glob = 'src/index.html'
+  ->
+    gulp.src(glob)
+      .pipe(if isWatch then require('gulp-watch')(glob) else util.noop())
+      .pipe(gulp.dest('build'))
+      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+
+gulp.task 'html-build', html(false)
+gulp.task 'html-watch', html(true)
+
+assets = (isWatch) ->
+  glob = 'assets/**/*'
+  ->
+    gulp.src(glob)
+      .pipe(if isWatch then require('gulp-watch')(glob) else util.noop())
+      .pipe(gulp.dest('build'))
+      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+
+gulp.task 'assets-build', assets(false)
+gulp.task 'assets-watch', assets(true)
+
+
+
+#
 # server
 #
 
@@ -104,10 +131,10 @@ livereload = (cb) ->
 gulp.task('livereload', livereload)
 
 # prod tasks
-gulp.task('build', ['scripts-build', 'styles-build'])
+gulp.task('build', ['scripts-build', 'styles-build', 'html-build', 'assets-build'])
 
 # dev tasks
-gulp.task('watch', ['scripts-watch', 'styles-watch'])
+gulp.task('watch', ['scripts-watch', 'styles-watch', 'html-watch', 'assets-watch'])
 gulp.task('develop', ['livereload', 'watch', 'server'])
 
 gulp.task('default', ['server'])
