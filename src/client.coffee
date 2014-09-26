@@ -5,8 +5,6 @@ React = require('react')
 Flux = require('./flux.coffee')
 App = require('./app.coffee')
 
-require('./index.css')
-
 if process.env.NODE_ENV isnt 'production'
   require('debug').enable("*")
 

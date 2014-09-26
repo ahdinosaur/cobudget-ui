@@ -27,8 +27,7 @@
   "browserify": {
     "transform": [
       "coffee-reactify",
-      "envify",
-      "cssify"
+      "envify"
     ]
   },
   "testling": {
@@ -54,7 +53,6 @@
     "coffee-reactify": "^1.0.2",
     "coffeeify": "^0.7.0",
     "consolidate": "^0.10.0",
-    "cssify": "^0.6.0",
     "debug": "^2.0.0",
     "eco": "^1.1.0-rc-3",
     "ecstatic": "^0.5.4",
