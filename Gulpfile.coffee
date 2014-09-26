@@ -14,17 +14,17 @@ lr = undefined
 #
 less = require('gulp-less')
 
-styles = (isWatch) ->
-  glob = 'src/**/*.less'
-  ->
-    gulp.src(glob)
-      .pipe(if isWatch then require('gulp-watch')(glob) else util.noop())
-      .pipe(less())
-      .pipe(gulp.dest('./build'))
-      .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
+styles = ->
+  gulp.src('./src/index.less')
+    .pipe(less(
+      paths: ['./src', './node_modules/bootstrap/less']
+    ))
+    .pipe(gulp.dest('./build'))
+    .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
-gulp.task 'styles-build', styles(false)
-gulp.task 'styles-watch', styles(true)
+gulp.task 'styles-build', styles
+gulp.task 'styles-watch', ->
+  gulp.watch('./src/**/*.less', ['styles-build'])
 
 #
 # scripts
