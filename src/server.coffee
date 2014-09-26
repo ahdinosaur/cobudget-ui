@@ -8,34 +8,48 @@ React = require('react')
 App = require('./app.coffee')
 Flux = require('./flux.coffee')
 
-if process.env.NODE_ENV isnt 'production'
+env = process.env
+
+if env.NODE_ENV isnt 'production'
   require('debug').enable("*")
 
-webapp = express()
+module.exports = (options) ->
+  options or= {}
 
-engines = require('consolidate')
-webapp.engine('eco', engines.eco)
-webapp.set('views', __dirname)
-webapp.set('view engine', 'eco')
+  webapp = express()
 
-# Cached regex for stripping a leading hash/slash and trailing space.
-routeStripper = /^[#\/]|\s+$/g
+  # add livereload middleware if dev
+  if (env.NODE_ENV == 'development')
+    webapp.use(require('connect-livereload')({
+      port: env.LIVERELOAD_PORT or 35729
+    }))
 
-webapp.get('/bundle.js', browserify(__dirname + '/../client.js'))
+  webapp.use(require('ecstatic')({
+    root: options.root or __dirname + '/../build'
+    cache: options.cache or
+      if env.NODE_ENV == 'production' then 3600 else 0
+  }))
 
-webapp.use (req, res, next) ->
-  try
-    path = url.parse(req.url).pathname
-    path = path.replace(routeStripper, '')
-    
-    flux = Flux(path)
-    app = App(path: path, flux: flux)
-    content = React.renderComponentToString(app)
+  engines = require('consolidate')
+  webapp.engine('eco', engines.eco)
+  webapp.set('views', __dirname)
+  webapp.set('view engine', 'eco')
 
-    res.render('index', content: content)
+  # Cached regex for stripping a leading hash/slash and trailing space.
+  routeStripper = /^[#\/]|\s+$/g
 
-  catch err
-    return next(err)
+  webapp.use (req, res, next) ->
+    try
+      path = url.parse(req.url).pathname
+      path = path.replace(routeStripper, '')
+      
+      flux = Flux(path)
+      app = App(path: path, flux: flux)
+      content = React.renderComponentToString(app)
 
-server = http.createServer(webapp)
-server.listen(5000)
+      res.render('index', content: content)
+
+    catch err
+      return next(err)
+
+  http.createServer(webapp)
