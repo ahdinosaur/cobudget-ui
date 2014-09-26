@@ -70,6 +70,7 @@
     "mocha": "^1.21.4",
     "mocha-as-promised": "^2.0.0",
     "nodemon": "^1.2.1",
+    "sinon": "^1.10.3",
     "testling": "^1.7.1"
   }
 }
