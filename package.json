@@ -6,7 +6,8 @@
   "browser": "client.js",
   "scripts": {
     "develop": "(export NODE_ENV=development; nodemon .)",
-    "test": "(export NODE_ENV=test; testling)",
+    "test-client": "(export NODE_ENV=test; testling -x google-chrome)",
+    "test-server": "(export NODE_ENV=test; mocha -r src/coffee.js -R spec src/node_modules/**/test/*.coffee)",
     "start": "(export NODE_ENV=production; node .)"
   },
   "repository": {
@@ -28,7 +29,7 @@
     ]
   },
   "testling": {
-    "files": "test/**/*.js",
+    "files": "src/node_modules/**/test/*.coffee",
     "harness": "mocha",
     "browsers": [
       "ie/9..latest",
