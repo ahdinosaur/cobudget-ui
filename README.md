@@ -1,13 +1,13 @@
-# directory-ui
+# cobudget-ui
 
-user interface for people app
+user interface for CoBudget!
 
 ## how
 
 ### install
 
 ```
-git clone https://github.com/derekrazo/directory-ui
+git clone https://github.com/open-app/cobudget-ui
 npm install
 ```
 
@@ -27,10 +27,4 @@ npm run develop
 
 ```
 npm test
-```
-
-## deploy
-
-```
-npm run deploy
 ```
