@@ -14,12 +14,16 @@ lr = undefined
 # styles
 #
 less = require('gulp-less')
+autoprefix = require('gulp-autoprefixer')
 
 styles = ->
   gulp.src('./src/index.less')
     .pipe(plumber())
     .pipe(less(
       paths: ['./src', './node_modules/bootstrap/less']
+    ))
+    .pipe(autoprefix(
+      browsers: ['> 1%', 'last 2 versions']
     ))
     .pipe(gulp.dest('./build'))
     .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
