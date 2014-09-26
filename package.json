@@ -62,7 +62,9 @@
   },
   "devDependencies": {
     "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
     "mocha": "^1.21.4",
+    "mocha-as-promised": "^2.0.0",
     "nodemon": "^1.2.1",
     "testling": "^1.7.1"
   }
