@@ -9,7 +9,7 @@
     "develop": "gulp develop",
     "test-client": "testling -x google-chrome",
     "test-server": "mocha -r src/coffee.js -R spec src/node_modules/**/test/*.coffee",
-    "test": "(export NODE_ENV=test; npm run test-server && npm run test-server)",
+    "test": "(export NODE_ENV=test; npm run test-server && npm run test-client)",
     "dev": "(export NODE_ENV=development; npm run develop)",
     "prod": "(export NODE_ENV=production; npm run start)"
   },
