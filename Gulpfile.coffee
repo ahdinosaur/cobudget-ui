@@ -2,6 +2,7 @@ gulp = require('gulp')
 source = require('vinyl-source-stream')
 util = require('gulp-util')
 plumber = require('gulp-plumber')
+sourcemaps = require('gulp-sourcemaps')
 
 refresh = require('gulp-livereload')
 lrServer = require('tiny-lr')()
@@ -19,12 +20,14 @@ autoprefix = require('gulp-autoprefixer')
 styles = ->
   gulp.src('./src/index.less')
     .pipe(plumber())
+    .pipe(sourcemaps.init())
     .pipe(less(
       paths: ['./src', './node_modules/bootstrap/less']
     ))
     .pipe(autoprefix(
       browsers: ['> 1%', 'last 2 versions']
     ))
+    .pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./build'))
     .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
