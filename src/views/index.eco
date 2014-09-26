@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CoBudget!</title>
+  </head>
+  <body>
+    <main>
+      <%- @content %>
+    </main>
+    <script src='/bundle.js'></script>
+  </body>
+</html>

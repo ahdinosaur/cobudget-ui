@@ -1,0 +1,70 @@
+{
+  "name": "directory-ui",
+  "version": "0.1.0",
+  "description": "user interface for people and circles",
+  "main": "server.js",
+  "browser": "client.js",
+  "scripts": {
+    "develop": "(export NODE_ENV=development; nodemon .)",
+    "test": "(export NODE_ENV=test; testling)",
+    "start": "(export NODE_ENV=production; node .)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ahdinosaur/directory-ui.git"
+  },
+  "keywords": [],
+  "author": "ahdinosaur",
+  "license": "AGPLv3",
+  "bugs": {
+    "url": "https://github.com/ahdinosaur/directory-ui/issues"
+  },
+  "homepage": "https://github.com/ahdinosaur/directory-ui",
+  "browserify": {
+    "transform": [
+      "cjsxify",
+      "envify",
+      "cssify"
+    ]
+  },
+  "testling": {
+    "files": "test/**/*.js",
+    "harness": "mocha",
+    "browsers": [
+      "ie/9..latest",
+      "firefox/15,18,21,23..nightly",
+      "chrome/20,23,26,29..canary",
+      "opera/15..next",
+      "safari/6..latest",
+      "iphone/6",
+      "ipad/6",
+      "android-browser/4.2"
+    ]
+  },
+  "dependencies": {
+    "browserify": "^5.12.0",
+    "browserify-middleware": "^3.0.1",
+    "cjsxify": "^0.2.5",
+    "coffeeify": "^0.7.0",
+    "consolidate": "^0.10.0",
+    "cssify": "^0.6.0",
+    "debug": "^2.0.0",
+    "eco": "^1.1.0-rc-3",
+    "envify": "^3.0.0",
+    "express": "^4.9.5",
+    "fluxxor": "^1.4.1",
+    "location-bar": "^2.0.0",
+    "lodash": "^2.4.1",
+    "node-cjsx": "^0.1.2",
+    "node-jsx": "^0.11.0",
+    "react": "^0.11.2",
+    "uglifyify": "^2.5.0",
+    "uuid": "^1.4.2"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4",
+    "nodemon": "^1.2.1",
+    "testling": "^1.7.1"
+  }
+}
