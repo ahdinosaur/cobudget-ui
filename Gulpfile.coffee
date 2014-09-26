@@ -1,6 +1,7 @@
 gulp = require('gulp')
 source = require('vinyl-source-stream')
 util = require('gulp-util')
+plumber = require('gulp-plumber')
 
 refresh = require('gulp-livereload')
 lrServer = require('tiny-lr')()
@@ -16,6 +17,7 @@ less = require('gulp-less')
 
 styles = ->
   gulp.src('./src/index.less')
+    .pipe(plumber())
     .pipe(less(
       paths: ['./src', './node_modules/bootstrap/less']
     ))
