@@ -32,13 +32,12 @@ module.exports = (options) ->
     autoIndex: false
   }))
 
-  engines = require('consolidate')
-  webapp.engine('eco', engines.eco)
-  webapp.set('views', __dirname)
-  webapp.set('view engine', 'eco')
+  index = fs.readFileSync(__dirname + '/index.html')
 
   # Cached regex for stripping a leading hash/slash and trailing space.
   routeStripper = /^[#\/]|\s+$/g
+  # cached regex for replacing main content
+  mainContent = /<!-- CONTENT -->/
 
   webapp.use (req, res, next) ->
     try
@@ -49,7 +48,8 @@ module.exports = (options) ->
       app = App(path: path, flux: flux)
       content = React.renderComponentToString(app)
 
-      res.render('index', content: content)
+      end = index.toString().replace(mainContent, content)
+      res.status(200).send(end)
 
     catch err
       return next(err)
