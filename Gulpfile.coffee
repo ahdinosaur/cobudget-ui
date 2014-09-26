@@ -21,7 +21,7 @@ less = require('gulp-less')
 autoprefix = require('gulp-autoprefixer')
 
 styles = ->
-  gulp.src('./src/index.less')
+  gulp.src('./src/*.less')
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(less(
@@ -36,7 +36,7 @@ styles = ->
 
 gulp.task 'styles-build', styles
 gulp.task 'styles-watch', ->
-  gulp.watch('./src/**/*.less', ['styles-build'])
+  gulp.watch('src/**/*.less', ['styles-build'])
 
 #
 # scripts
