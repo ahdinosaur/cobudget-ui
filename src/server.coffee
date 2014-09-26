@@ -2,7 +2,6 @@ fs = require('fs')
 http = require('http')
 url = require('url')
 express = require('express')
-browserify = require('browserify-middleware')
 React = require('react')
 
 App = require('./app.coffee')
