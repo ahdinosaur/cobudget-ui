@@ -28,6 +28,8 @@ module.exports = (options) ->
     root: options.root or __dirname + '/../build'
     cache: options.cache or
       if env.NODE_ENV == 'production' then 3600 else 0
+    showDir: false
+    autoIndex: false
   }))
 
   engines = require('consolidate')
