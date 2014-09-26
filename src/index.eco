@@ -5,7 +5,7 @@
   </head>
   <body>
     <main>
-      <%- @content %>
+      <!-- <%- @content %> -->
     </main>
     <script src='/bundle.js'></script>
   </body>
