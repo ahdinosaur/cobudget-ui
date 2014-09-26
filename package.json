@@ -22,7 +22,7 @@
   "homepage": "https://github.com/ahdinosaur/directory-ui",
   "browserify": {
     "transform": [
-      "cjsxify",
+      "coffee-reactify",
       "envify",
       "cssify"
     ]
@@ -44,7 +44,8 @@
   "dependencies": {
     "browserify": "^5.12.0",
     "browserify-middleware": "^3.0.1",
-    "cjsxify": "^0.2.5",
+    "coffee-react": "^1.0.2",
+    "coffee-reactify": "^1.0.2",
     "coffeeify": "^0.7.0",
     "consolidate": "^0.10.0",
     "cssify": "^0.6.0",
@@ -55,8 +56,6 @@
     "fluxxor": "^1.4.1",
     "location-bar": "^2.0.0",
     "lodash": "^2.4.1",
-    "node-cjsx": "^0.1.2",
-    "node-jsx": "^0.11.0",
     "react": "^0.11.2",
     "uglifyify": "^2.5.0",
     "uuid": "^1.4.2"

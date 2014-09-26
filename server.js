@@ -1,4 +1,2 @@
-require('node-cjsx').transform({ extension: '.cjsx' });
-require('node-jsx').install({ extension: '.jsx' });
-
+require('./src/coffee');
 require('./src/server.coffee');
