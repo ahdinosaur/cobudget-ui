@@ -19,6 +19,7 @@ lr = undefined
 #
 less = require('gulp-less')
 autoprefix = require('gulp-autoprefixer')
+rename = require('gulp-rename')
 
 styles = ->
   gulp.src('./src/*.less')
@@ -27,11 +28,13 @@ styles = ->
     .pipe(less(
       paths: ['./src', './node_modules/bootstrap/less']
     ))
+    .pipe(rename(extname: ".less"))
     .pipe(autoprefix(
       browsers: ['> 1%', 'last 2 versions']
     ))
-    .pipe(sourcemaps.write('./maps'))
-    .pipe(gulp.dest('./build'))
+    .pipe(rename(extname: ".css"))
+    .pipe(sourcemaps.write('../maps'))
+    .pipe(gulp.dest('build/styles'))
     .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
 gulp.task 'styles-build', styles
