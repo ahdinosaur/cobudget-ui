@@ -1,13 +1,16 @@
 gulp = require('gulp')
 source = require('vinyl-source-stream')
+buffer = require('vinyl-buffer')
 util = require('gulp-util')
 plumber = require('gulp-plumber')
 sourcemaps = require('gulp-sourcemaps')
+extend = require('extend')
 
 refresh = require('gulp-livereload')
 lrServer = require('tiny-lr')()
 
 env = process.env
+nodeEnv = env.NODE_ENV
 
 lr = undefined
 
@@ -39,25 +42,41 @@ gulp.task 'styles-watch', ->
 # scripts
 #
 browserify = require('browserify')
+mold = require('mold-source-map')
 
 scripts = (isWatch) ->
   ->
+    plugin = (bundler) ->
+      bundler
+        .plugin(require('bundle-collapser/plugin'))
+
     bundle = (bundler) ->
       bundler.bundle()
         .on('error', util.log.bind(util, "browserify error"))
+        .pipe(mold.transformSourcesRelativeTo('./src'))
         .pipe(source('bundle.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init(loadMaps: true))
+        .pipe(if nodeEnv == 'production' then require('gulp-uglify')() else util.noop())
+        .pipe(sourcemaps.write('./maps'))
         .pipe(gulp.dest('./build'))
         .pipe(if lr then require('gulp-livereload')(lr) else util.noop())
 
+    args = {
+      entries: ['.']
+      debug: true
+      cwd: __dirname + '/src'
+    }
+
     if (isWatch)
       watchify = require('watchify')
-      bundler = watchify(browserify('.', watchify.args))
+      bundler = plugin(watchify(browserify(extend(args, watchify.args))))
       rebundle = -> bundle(bundler)
       bundler.on('update', rebundle)
       bundler.on('log', console.log.bind(console))
       rebundle()
     else
-      bundle(browserify('.'))
+      bundle(plugin(browserify(args)))
 
 gulp.task 'scripts-build', scripts(false)
 gulp.task 'scripts-watch', scripts(true)
