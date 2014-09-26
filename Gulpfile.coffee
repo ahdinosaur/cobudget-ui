@@ -68,7 +68,6 @@ scripts = (isWatch) ->
     args = {
       entries: ['.']
       debug: true
-      cwd: __dirname + '/src'
     }
 
     if (isWatch)
