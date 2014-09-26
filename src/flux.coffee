@@ -1,6 +1,6 @@
 Fluxxor = require('fluxxor')
 
-stores = require('./stores/index.coffee')
+stores = require('./stores.coffee')
 actions = require('./actions.coffee')
 
 module.exports = (path) ->

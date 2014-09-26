@@ -5,8 +5,8 @@ express = require('express')
 browserify = require('browserify-middleware')
 React = require('react')
 
-App = require('./components/App.coffee')
-Flux = require('./Flux.coffee')
+App = require('./app.coffee')
+Flux = require('./flux.coffee')
 
 if process.env.NODE_ENV isnt 'production'
   require('debug').enable("*")
@@ -15,7 +15,7 @@ webapp = express()
 
 engines = require('consolidate')
 webapp.engine('eco', engines.eco)
-webapp.set('views', __dirname + '/views')
+webapp.set('views', __dirname)
 webapp.set('view engine', 'eco')
 
 # Cached regex for stripping a leading hash/slash and trailing space.

@@ -4,19 +4,19 @@ debug = require('debug')("cobudget-ui:components:App")
 React = require('react')
 Fluxxor = require('fluxxor')
 
-Nav = require('./Nav.coffee')
-Budget = require('./Budget.coffee')
+NavBar = require('nav/views/bar.coffee')
+Budget = require('budgets/views/one.coffee')
 
 FluxMixin = Fluxxor.FluxMixin(React)
 StoreWatchMixin = Fluxxor.StoreWatchMixin
 
 module.exports = React.createClass
-  mixins: [FluxMixin, StoreWatchMixin("Path", "Budgets")]
+  mixins: [FluxMixin, StoreWatchMixin("Nav", "Budgets")]
 
   getStateFromFlux: ->
     flux = this.getFlux()
     state = {
-      path: flux.store("Path").path
+      path: flux.store("Nav").path
       budgets: flux.store("Budgets").budgets
     }
 
@@ -33,7 +33,7 @@ module.exports = React.createClass
 
     return (
       <div>
-        <Nav path={@state.path} />
+        <NavBar path={@state.path} />
         {page}
       </div>
     )

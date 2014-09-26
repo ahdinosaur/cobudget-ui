@@ -2,8 +2,8 @@
 
 React = require('react')
 
-Flux = require('./Flux.coffee')
-App = require('./components/App.coffee')
+Flux = require('./flux.coffee')
+App = require('./app.coffee')
 
 require('./index.css')
 
