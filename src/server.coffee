@@ -4,6 +4,8 @@ url = require('url')
 express = require('express')
 React = require('react')
 
+require('./coffee')
+
 App = require('./app.coffee')
 Flux = require('./flux.coffee')
 
