@@ -33,7 +33,7 @@ module.exports = React.createClass
 
     return (
       <div>
-        <NavBar path={@state.path} />
+        <NavBar path={@state.path} budgets={@state.budgets} />
         {page}
       </div>
     )
