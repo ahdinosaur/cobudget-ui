@@ -9,6 +9,9 @@ extend = require('extend')
 refresh = require('gulp-livereload')
 lrServer = require('tiny-lr')()
 
+# default environment to development
+process.env.NODE_ENV or= 'development'
+
 env = process.env
 nodeEnv = env.NODE_ENV
 
