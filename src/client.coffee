@@ -15,6 +15,8 @@ if not document.querySelector('main')
 
 flux = Flux()
 
+flux.stores.Budgets.load()
+
 React.renderComponent(
   <App flux={flux} />
   document.querySelector('main')
