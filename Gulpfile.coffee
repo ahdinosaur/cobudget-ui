@@ -75,7 +75,7 @@ scripts = (isWatch) ->
 
     if (isWatch)
       watchify = require('watchify')
-      bundler = plugin(watchify(browserify(extend(args, watchify.args))))
+      bundler = watchify(browserify(extend(args, watchify.args)))
       rebundle = -> bundle(bundler)
       bundler.on('update', rebundle)
       bundler.on('log', console.log.bind(console))
