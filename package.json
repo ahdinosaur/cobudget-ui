@@ -71,7 +71,9 @@
     "lodash": "^2.4.1",
     "mold-source-map": "^0.3.0",
     "nets": "^1.0.0",
+    "path-match": "^1.2.2",
     "react": "^0.11.2",
+    "reverend": "^0.3.0",
     "uuid": "^1.4.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.0.0"

@@ -15,9 +15,14 @@ module.exports = React.createClass
 
   getStateFromFlux: ->
     flux = this.getFlux()
+
+    Nav = flux.store("Nav")
+    Budgets = flux.store("Budgets")
+
     state = {
-      path: flux.store("Nav").path
-      budgets: flux.store("Budgets").budgets
+      path: Nav.path
+      route: Nav.route
+      budgets: Budgets.budgets
     }
 
     debug("getStateFromFlux", state)
