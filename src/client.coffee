@@ -13,6 +13,11 @@ if not document.querySelector('main')
   mainEl = document.createElement("main")
   document.body.appendChild(mainEl)
 
+# require jquery
+global.jQuery = require('jquery')
+# require bootstrap
+require('bootstrap-sass/assets/javascripts/bootstrap')
+
 flux = Flux()
 
 require('./load.coffee')(flux)
