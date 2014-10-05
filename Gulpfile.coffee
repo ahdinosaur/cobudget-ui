@@ -20,18 +20,20 @@ lr = undefined
 #
 # styles
 #
-less = require('gulp-less')
+sass = require('gulp-sass')
 autoprefix = require('gulp-autoprefixer')
 rename = require('gulp-rename')
 
 styles = ->
-  gulp.src('./src/*.less')
+  gulp.src('./src/*.sass')
     .pipe(plumber())
     .pipe(sourcemaps.init())
-    .pipe(less(
-      paths: ['./src', './node_modules/bootstrap/less']
+    .pipe(sass(
+      includePaths: [
+        __dirname + "/node_modules/bootstrap-sass/assets/stylesheets/"
+      ]
     ))
-    .pipe(rename(extname: ".less"))
+    .pipe(rename(extname: ".sass"))
     .pipe(autoprefix(
       browsers: ['> 1%', 'last 2 versions']
     ))
@@ -42,7 +44,7 @@ styles = ->
 
 gulp.task 'styles-build', styles
 gulp.task 'styles-watch', ->
-  gulp.watch('src/**/*.less', ['styles-build'])
+  gulp.watch('src/**/*.sass', ['styles-build'])
 
 #
 # scripts
