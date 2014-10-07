@@ -3,7 +3,7 @@
 React = require('react')
 
 Flux = require('./flux.coffee')
-App = require('./app.coffee')
+App = require('app')
 
 if process.env.NODE_ENV isnt 'production'
   require('debug').enable("*")

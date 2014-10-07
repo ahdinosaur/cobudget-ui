@@ -6,7 +6,7 @@ React = require('react')
 
 require('./coffee')
 
-App = require('./app.coffee')
+App = require('app')
 Flux = require('./flux.coffee')
 
 env = process.env
