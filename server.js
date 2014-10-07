@@ -1,3 +1,3 @@
-var port = process.env.PORT or 5000
+var port = process.env.PORT || 5000;
 require('./src/coffee')
-require('./src/server').listen(port)
+require('./src/server')().listen(port)
