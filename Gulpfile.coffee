@@ -118,10 +118,15 @@ gulp.task 'assets-watch', assets(true)
 #
 # server
 #
+nodemon = require('gulp-nodemon')
 
 server = (cb) ->
-  webapp = require('./src/server.coffee')()
-  webapp.listen(env.PORT or 5000, cb)
+  nodemon(
+    script: "server.js"
+    ext: "js json coffee html"
+    ignore: [".git", "node_modules", "build"]
+    env: env
+  )
 
 gulp.task('server', server)
 
