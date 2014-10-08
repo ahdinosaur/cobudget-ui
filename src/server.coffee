@@ -3,10 +3,11 @@ http = require('http')
 url = require('url')
 express = require('express')
 React = require('react')
+Router = require('react-router')
 
 require('./coffee')
 
-App = require('app')
+Routes = require('app')
 Flux = require('./flux.coffee')
 
 env = process.env
@@ -46,9 +47,13 @@ module.exports = (options) ->
       path = url.parse(req.url).pathname
       path = path.replace(routeStripper, '')
       
-      flux = Flux(path)
-      app = App(path: path, flux: flux)
-      content = React.renderComponentToString(app)
+      ###
+      don't actually render on server for now
+      flux = Flux()
+      routes = Routes(flux, path)
+      content = Router.renderRoutesToString(routes)
+      ###
+      content = ""
 
       end = index.toString().replace(mainContent, content)
       res.status(200).send(end)

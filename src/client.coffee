@@ -3,7 +3,7 @@
 React = require('react')
 
 Flux = require('./flux.coffee')
-App = require('app')
+Routes = require('app')
 
 if process.env.NODE_ENV isnt 'production'
   require('debug').enable("*")
@@ -20,9 +20,7 @@ require('bootstrap-sass/assets/javascripts/bootstrap')
 
 flux = Flux()
 
-require('./load.coffee')(flux)
-
 React.renderComponent(
-  <App flux={flux} />
+  Routes(flux)
   document.querySelector('main')
 )
